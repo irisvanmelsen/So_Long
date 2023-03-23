@@ -6,7 +6,7 @@
 /*   By: ivan-mel <ivan-mel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 12:51:17 by ivan-mel          #+#    #+#             */
-/*   Updated: 2023/03/22 15:20:48 by ivan-mel         ###   ########.fr       */
+/*   Updated: 2023/03/23 19:08:47 by ivan-mel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,17 @@
 
 void	struct_map(t_error *error)
 {
-	t_error	check_map;
-
+	check_map = ft_calloc(sizeof(t_map), 1);
+	if (!map)
+		exit (EXIT_FAILURE);
 	check_map.error_walls = 0;
 	check_map.error_rec = 0;
 	check_map.error_one_each = 0;
 }
 
-void	check_erorrs(char *line)
+int	check_errors(t_error *error, t_map *map)
 {
-	if 
-}
-
-int	check_walls(char *line)
-{
-	
-}
-
-int	check_rectangle(char *line)
-{
-	while (line)
-	{
-
-	}
+	struct_map(error);
+	if (check_walls == 1)
+		check_map.error_walls = 1;
 }

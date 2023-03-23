@@ -6,7 +6,7 @@
 #    By: ivan-mel <ivan-mel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/21 12:51:22 by ivan-mel          #+#    #+#              #
-#    Updated: 2023/03/22 15:07:23 by ivan-mel         ###   ########.fr        #
+#    Updated: 2023/03/23 13:34:35 by ivan-mel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ RM 			:=	rm -rf
 FLAGS 		:=	-Wall -Werror -Wextra -g
 SRC			:=	create_map.c \
 				create_map_utils.c \
-				main.c 
+				main.c \
+				free_and_exit.c
 #BONUS
 # SRCB		:=	
 

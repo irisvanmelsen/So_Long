@@ -6,7 +6,7 @@
 /*   By: ivan-mel <ivan-mel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:35:22 by ivan-mel          #+#    #+#             */
-/*   Updated: 2023/03/22 17:59:30 by ivan-mel         ###   ########.fr       */
+/*   Updated: 2023/03/23 15:59:49 by ivan-mel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,33 +18,24 @@ char	**read_map(int fd)
 	char	*tmp;
 	char	*line;
 	char	**result;
+	int		i;
 
+	i = 0;
 	line = get_next_line(fd);
-	if (!line)
-		exit(1);
-	map = ft_strdup(line);
-	free(line);
-	line = get_next_line(fd);
-	if (!line)
-		exit(1);
+	tmp = ft_strdup(line);
 	while (line)
 	{
-		tmp = ft_strjoin(map, line);
-		if (!tmp)
-			exit(1);
 		free(line);
-		free(map);
-		map = tmp;
 		line = get_next_line(fd);
-		if (!tmp)
-			exit(1);
+		if (line != NULL)
+			map = ft_strjoin(tmp, line);
+		free(tmp);
+		tmp = ft_strdup(map);
 	}
 	result = ft_split(map, '\n');
-	if (!result)
-		exit(1);
+	exit_one(*result);
+	free(tmp);
 	free(map);
-	if (!result)
-		return (NULL);
 	return (result);
 }
 

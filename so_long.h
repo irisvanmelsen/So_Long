@@ -6,7 +6,7 @@
 /*   By: ivan-mel <ivan-mel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 12:56:18 by ivan-mel          #+#    #+#             */
-/*   Updated: 2023/03/22 15:10:01 by ivan-mel         ###   ########.fr       */
+/*   Updated: 2023/03/23 17:20:38 by ivan-mel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,9 @@
 # include <get_next_line.h>
 # include <ft_printf.h>
 
-// # include "../Libft/libft.h"
-// # include "../Libft/ft_printf.h"
-// # include "../Libft/get_next_line.h"
-
 typedef struct s_error
 {
+	char *check_map;
 	int	error_rec;
 	int	error_walls;
 	int	error_one_each;
@@ -36,9 +33,9 @@ typedef struct s_error
 
 typedef struct s_map
 {
-	char **content;
-	int	length_x;
-	int	length_y;
+	char	**content;
+	int		length_x;
+	int		length_y;
 }	t_map;
 
 // --------------------------MAP---------------------------------------
@@ -51,6 +48,12 @@ int		count_lines(char **content);
 // ------------------------PARSING-------------------------------------
 //
 // -----------------------map_parsing----------------------------------
-
+void	struct_map(t_error *error, t_map *map);
+int		check_walls(t_map *map);
+int		check_rectangle(t_map *map);
+// ---------------------------FREE-------------------------------------
+//
+// ---------------------------free-------------------------------------
+void	exit_one(char *ptr);
 
 #endif
