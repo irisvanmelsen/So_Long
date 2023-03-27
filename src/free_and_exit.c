@@ -6,7 +6,7 @@
 /*   By: ivan-mel <ivan-mel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/23 13:28:00 by ivan-mel          #+#    #+#             */
-/*   Updated: 2023/03/23 14:04:19 by ivan-mel         ###   ########.fr       */
+/*   Updated: 2023/03/27 13:54:01 by ivan-mel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,8 @@
 void	exit_one(char *ptr)
 {
 	if (!ptr)
+	{
+		ft_printf("Error in %s\n", ptr);
 		exit(1);
+	}
 }
