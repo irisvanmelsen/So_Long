@@ -6,17 +6,26 @@
 /*   By: ivan-mel <ivan-mel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 12:51:17 by ivan-mel          #+#    #+#             */
-/*   Updated: 2023/03/27 17:57:32 by ivan-mel         ###   ########.fr       */
+/*   Updated: 2023/03/29 18:22:21 by ivan-mel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-int	check_errors(t_map *map)
+void	check_map_init(t_map *map)
 {
 	map->e_count = 0;
 	map->p_count = 0;
 	map->c_count = 0;
+	map->player_x = 0;
+	map->player_y = 0;
+}
+
+int	check_errors(t_map *map)
+{
+	char	**map_after_ff;
+
+	check_map_init(map);
 	if (check_rectangle(map) == 1)
 		return (ft_printf("Wall is not Rectangular\n"));
 	if (check_sides_wall(map) == 1)
@@ -25,6 +34,10 @@ int	check_errors(t_map *map)
 		return (ft_printf("Invalid Wall Error\n"));
 	if (check_characters(map) == 1)
 		return (ft_printf("Invalid amount of characters\n"));
+	find_player(map);
+	map_after_ff = floodfill(map->content, map->player_y, map->player_x);
+	if (check_map_after_ff(map_after_ff) == 1)
+		return (ft_printf("Invalid Path\n"));
 	return (0);
 }
 
@@ -69,6 +82,7 @@ int	check_rectangle(t_map *map)
 	int	i;
 
 	i = 0;
+
 	while (map->content[i])
 	{
 		if (map_strlen(map->content[i]) != map->length_x)
@@ -76,28 +90,4 @@ int	check_rectangle(t_map *map)
 		i++;
 	}
 	return (0);
-}
-
-int	check_characters(t_map *map)
-{
-	int x;
-	int	y;
-	int	i;
-
-	x = 0;
-	y = 0;
-	i = 0;
-	while (map->content[y][x])
-	{
-		if (map->content[i] == 'E')
-			map->e_count++;
-		if (map->content[i] == 'P')
-			map->p_count++;
-		if (map->content[i]) == 'C')
-			map->c_count[i];
-
-		x++;
-	}
-	if (map->e_count != 1 || map->p_count != 1 || map->c_count < 1 )
-		return (1);
 }

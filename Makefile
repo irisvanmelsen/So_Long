@@ -6,7 +6,7 @@
 #    By: ivan-mel <ivan-mel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/21 12:51:22 by ivan-mel          #+#    #+#              #
-#    Updated: 2023/03/27 16:24:16 by ivan-mel         ###   ########.fr        #
+#    Updated: 2023/03/29 18:23:36 by ivan-mel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,11 +16,11 @@ HEADER		:=	-I libft
 HEADERS		:=	libft/libft.h
 #UTILS
 RM 			:=	rm -rf
-FLAGS 		:=	-Wall -Werror -Wextra -g
+FLAGS 		:=	-Wall -Werror -Wextra -g -fsanitize=address
 SRC			:=	create_map.c \
-				create_map_utils.c \
 				main.c \
 				map_parsing.c \
+				map_parsing2.c \
 				free_and_exit.c
 #BONUS
 # SRCB		:=	

@@ -6,7 +6,7 @@
 /*   By: ivan-mel <ivan-mel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 12:56:18 by ivan-mel          #+#    #+#             */
-/*   Updated: 2023/03/27 17:57:14 by ivan-mel         ###   ########.fr       */
+/*   Updated: 2023/03/29 18:23:26 by ivan-mel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ typedef struct s_map
 	int		e_count;
 	int		p_count;
 	int		c_count;
+	int		player_x;
+	int		player_y;
 }	t_map;
 
 // --------------------------MAP---------------------------------------
@@ -45,17 +47,22 @@ typedef struct s_map
 // -----------------------create_map-----------------------------------
 char	**read_map(int fd);
 int		get_file(int argc, char **argv);
-// ---------------------create_map_utils-------------------------------
 int		count_lines(char **content);
-int		map_strlen(char *s);
 // ------------------------PARSING-------------------------------------
 //
 // -----------------------map_parsing----------------------------------
+void	check_map_init(t_map *map);
 int		check_errors(t_map *map);
 int		check_sides_wall(t_map *map);
 int		check_first_last_walls(t_map *map);
 int		check_rectangle(t_map *map);
+// -----------------------map_parsing2---------------------------------
 int		check_characters(t_map *map);
+int		map_strlen(char *s);
+char	**floodfill(char **content, int y, int x);
+void	find_player(t_map *map);
+int		check_map_after_ff(char **map_after_ff);
+// -----------------------map_parsing3---------------------------------
 // ---------------------------FREE-------------------------------------
 //
 // ---------------------------free-------------------------------------

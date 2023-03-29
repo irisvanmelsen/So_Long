@@ -6,7 +6,7 @@
 /*   By: ivan-mel <ivan-mel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:35:22 by ivan-mel          #+#    #+#             */
-/*   Updated: 2023/03/23 15:59:49 by ivan-mel         ###   ########.fr       */
+/*   Updated: 2023/03/29 18:23:18 by ivan-mel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,5 +51,15 @@ int	get_file(int argc, char **argv)
 	if (ft_strncmp(argv[1] + ft_strlen(argv[1]) - 4, ".ber", 4))
 		ft_printf("Incorrect File\n");
 	return (fd);
+}
+
+int	count_lines(char **content)
+{
+	int	i;
+
+	i = 0;
+	while (content[i] != '\0')
+		i++;
+	return (i);
 }
 
