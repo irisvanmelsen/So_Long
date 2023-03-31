@@ -6,7 +6,7 @@
 /*   By: ivan-mel <ivan-mel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 12:51:17 by ivan-mel          #+#    #+#             */
-/*   Updated: 2023/03/29 18:22:21 by ivan-mel         ###   ########.fr       */
+/*   Updated: 2023/03/31 17:29:24 by ivan-mel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ void	check_map_init(t_map *map)
 int	check_errors(t_map *map)
 {
 	char	**map_after_ff;
+	char	**dup_map;
 
+	dup_map = create_dup_map(map);
 	check_map_init(map);
 	if (check_rectangle(map) == 1)
 		return (ft_printf("Wall is not Rectangular\n"));
@@ -35,9 +37,12 @@ int	check_errors(t_map *map)
 	if (check_characters(map) == 1)
 		return (ft_printf("Invalid amount of characters\n"));
 	find_player(map);
-	map_after_ff = floodfill(map->content, map->player_y, map->player_x);
+	map_after_ff = floodfill(dup_map, map->player_y, map->player_x);
 	if (check_map_after_ff(map_after_ff) == 1)
+	{
+		free(map_after_ff);
 		return (ft_printf("Invalid Path\n"));
+	}
 	return (0);
 }
 
@@ -82,7 +87,6 @@ int	check_rectangle(t_map *map)
 	int	i;
 
 	i = 0;
-
 	while (map->content[i])
 	{
 		if (map_strlen(map->content[i]) != map->length_x)

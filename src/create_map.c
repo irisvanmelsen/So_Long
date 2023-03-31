@@ -6,7 +6,7 @@
 /*   By: ivan-mel <ivan-mel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:35:22 by ivan-mel          #+#    #+#             */
-/*   Updated: 2023/03/29 18:23:18 by ivan-mel         ###   ########.fr       */
+/*   Updated: 2023/03/31 16:42:45 by ivan-mel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ char	**read_map(int fd)
 	char	*tmp;
 	char	*line;
 	char	**result;
-	int		i;
 
-	i = 0;
 	line = get_next_line(fd);
 	tmp = ft_strdup(line);
 	while (line)
@@ -62,4 +60,3 @@ int	count_lines(char **content)
 		i++;
 	return (i);
 }
-
