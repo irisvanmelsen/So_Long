@@ -6,7 +6,7 @@
 /*   By: ivan-mel <ivan-mel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 12:56:18 by ivan-mel          #+#    #+#             */
-/*   Updated: 2023/03/31 15:10:10 by ivan-mel         ###   ########.fr       */
+/*   Updated: 2023/04/04 18:44:23 by ivan-mel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 
+# include <MLX42.h>
 # include <libft.h>
 # include <get_next_line.h>
 # include <ft_printf.h>
@@ -34,8 +35,10 @@ typedef struct s_map
 	int		c_count;
 	int		player_x;
 	int		player_y;
-
+	mlx_t	*mlx;
 }	t_map;
+
+
 
 // --------------------------MAP---------------------------------------
 //
@@ -59,6 +62,10 @@ void	find_player(t_map *map);
 int		check_map_after_ff(char **map_after_ff);
 // -----------------------map_parsing3---------------------------------
 char	**create_dup_map(t_map *map);
+// --------------------------WINDOW------------------------------------
+//
+// ---------------------------window-----------------------------------
+void	create_window(t_map *map);
 // ---------------------------FREE-------------------------------------
 //
 // ---------------------------free-------------------------------------

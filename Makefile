@@ -6,14 +6,16 @@
 #    By: ivan-mel <ivan-mel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/21 12:51:22 by ivan-mel          #+#    #+#              #
-#    Updated: 2023/03/31 13:39:21 by ivan-mel         ###   ########.fr        #
+#    Updated: 2023/04/04 18:45:35 by ivan-mel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME 		:= 	so_long
 LIBS		:=	./libft/libft.a
-HEADER		:=	-I libft
-HEADERS		:=	libft/libft.h
+HEADER		:=	-I libft -I MLX42/include/MLX42
+#MLX
+MLX			:=	./MLX42
+LIBS_MLX	:=	$(MLX)/build/libmlx42.a -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
 #UTILS
 RM 			:=	rm -rf
 FLAGS 		:=	-Wall -Werror -Wextra -g -fsanitize=address
@@ -22,6 +24,7 @@ SRC			:=	create_map.c \
 				map_parsing.c \
 				map_parsing2.c \
 				map_parsing3.c \
+				window.c \
 				free_and_exit.c
 #BONUS
 # SRCB		:=	
@@ -50,13 +53,16 @@ White		=	"\033[0;37m"		# White
 # Add obj directory to obj path
 OBJ		:= 	$(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 SRC		:=	$(addprefix $(SRC_DIR)/,$(SRC))
+libmlx:
+	@cmake $(MLX) -B $(MLX)/build && make -C $(MLX)/build -j4
 
-all: ${NAME}
+all: libmlx ${NAME}
 
 ${NAME}: ${OBJ}
 	@echo ${Blue} Building ${NAME} ${Color_Off}
 	@${MAKE} -C libft
-	@${CC} $^ ${LIBS} ${FLAGS} -o ${NAME}
+	@${MAKE} -C MLX42/build
+	@${CC} $^ ${LIBS} ${LIBS_MLX} ${FLAGS} -o ${NAME}
 	@echo ${Green} Complete 😊 ${Color_off}
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HEADERS) | $(OBJ_DIR)
@@ -73,14 +79,16 @@ $(OBJ_DIR):
 
 clean:
 	@echo ${Yellow} Deleting ${OBJ_DIR} ${Color_off}
-	@${MAKE} -C libft fclean
+	@${MAKE} -C libft clean
+	@${MAKE} -C ${MLX}/build clean
 	@${RM} ${OBJ_DIR}
 
 fclean: clean
 	@echo ${Yellow} Deleting ${NAME} ${Color_off}
 	@${MAKE} -C libft fclean
-	@${RM} ${NAME} checker
+	@${RM} ${MLX}/build 
+	@${RM} ${NAME}
 
-re:	fclean all
+re: fclean all
 
-.PHONY: all bonus clean fclean re
+.PHONY: all bonus clean fclean re libmlx
