@@ -6,7 +6,7 @@
 #    By: ivan-mel <ivan-mel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/21 12:51:22 by ivan-mel          #+#    #+#              #
-#    Updated: 2023/04/04 18:45:35 by ivan-mel         ###   ########.fr        #
+#    Updated: 2023/04/05 16:34:19 by ivan-mel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,11 +53,12 @@ White		=	"\033[0;37m"		# White
 # Add obj directory to obj path
 OBJ		:= 	$(addprefix $(OBJ_DIR)/,$(SRC:.c=.o))
 SRC		:=	$(addprefix $(SRC_DIR)/,$(SRC))
-libmlx:
-	@cmake $(MLX) -B $(MLX)/build && make -C $(MLX)/build -j4
 
 all: libmlx ${NAME}
 
+libmlx:
+	@cmake $(MLX) -B $(MLX)/build && make -C $(MLX)/build -j4
+	
 ${NAME}: ${OBJ}
 	@echo ${Blue} Building ${NAME} ${Color_Off}
 	@${MAKE} -C libft

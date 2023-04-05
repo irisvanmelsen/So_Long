@@ -6,7 +6,7 @@
 /*   By: ivan-mel <ivan-mel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:08:44 by ivan-mel          #+#    #+#             */
-/*   Updated: 2023/04/04 19:30:17 by ivan-mel         ###   ########.fr       */
+/*   Updated: 2023/04/05 19:19:10 by ivan-mel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,40 +22,62 @@
 
 // MLX_INIT: Initializes a new MLX42 Instance.
 
-void	create_window(t_map *map)
+void	create_window(t_map *map, t_game *game)
 {
-	map->mlx = mlx_init();
-	exit_one(map->mlx);
-	
-	mlx_loop_hook(map->mlx, ,);
+	map->mlx = mlx_init(map->length_y * 32, map->length_x * 32, "test", true);
+	if (!map->mlx)
+		ft_printf("Error map->mlx");
+	images_init(map, game);
+	place_images(map, game);
 	mlx_loop(map->mlx);
 	mlx_terminate(map->mlx);
-	return (EXIT_SUCCESS);
+	delete_textures(game);
 }
 
-int32_t	main(void)
+void	images_init(t_map *map, t_game *game)
 {
+	game->char_tx = mlx_load_png("Crow.png");
+	game->char_img = mlx_texture_to_image(map->mlx, game->char_tx);
+	game->wall_tx = mlx_load_png("Tree.png");
+	game->wall_img = mlx_texture_to_image(map->mlx, game->wall_tx);
+	game->col_tx = mlx_load_png("Drink.png");
+	game->col_img = mlx_texture_to_image(map->mlx, game->col_tx);
+	game->end_tx = mlx_load_png("Chest.png");
+	game->end_img = mlx_texture_to_image(map->mlx, game->end_tx);
+	game->backgr_tx = mlx_load_png("Background.png");
+	game->backgr_img = mlx_texture_to_image(map->mlx, game->backgr_tx);
+}
 
-	// MLX allows you to define its core behaviour before startup.
-	mlx_set_setting(MLX_MAXIMIZED, true);
-	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "42Balls", true);
-	if (!mlx)
-		ft_error();
+void	place_images(t_map *map, t_game *game)
+{
+	int	y;
+	int	x;
 
-	/* Do stuff */
+	y = 0;
+	while (map->content [y])
+	{
+		x = 0;
+		while (map->content [y][x])
+		{
+			mlx_image_to_window(map->mlx, game->backgr_img, y * 32, x * 32);
+			if (map->content [y][x] == 'P')
+				mlx_image_to_window(map->mlx, game->char_img, y * 32, x * 32);
+			if (map->content [y][x] == '1')
+				mlx_image_to_window(map->mlx, game->wall_img, y * 32, x * 32);
+			if (map->content [y][x] == 'C')
+				mlx_image_to_window(map->mlx, game->col_img, y * 32, x * 32);
+			if (map->content [y][x] == 'E')
+				mlx_image_to_window(map->mlx, game->end_img, y * 32, x * 32);
+			x++;
+		}
+		y++;
+	}
+}
 
-	// Create and display the image.
-	mlx_image_t* img = mlx_new_image(mlx, 256, 256);
-	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
-		ft_error();
-
-	// Even after the image is being displayed, we can still modify the buffer.
-	mlx_put_pixel(img, 0, 0, 0xFF0000FF);
-
-	// Register a hook and pass mlx as an optional param.
-	// NOTE: Do this before calling mlx_loop!
-	mlx_loop_hook(mlx, ft_hook, mlx);
-	mlx_loop(mlx);
-	mlx_terminate(mlx);
-	return (EXIT_SUCCESS);
+void	delete_textures(t_game *game)
+{
+	mlx_delete_texture(game->char_tx);
+	mlx_delete_texture(game->wall_tx);
+	mlx_delete_texture(game->col_tx);
+	mlx_delete_texture(game->end_tx);
 }

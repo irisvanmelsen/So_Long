@@ -6,7 +6,7 @@
 /*   By: ivan-mel <ivan-mel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 12:56:18 by ivan-mel          #+#    #+#             */
-/*   Updated: 2023/04/04 18:44:23 by ivan-mel         ###   ########.fr       */
+/*   Updated: 2023/04/05 18:56:27 by ivan-mel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,20 @@
 # include <get_next_line.h>
 # include <ft_printf.h>
 
+typedef struct s_game
+{
+	mlx_texture_t	*char_tx;
+	mlx_image_t		*char_img;
+	mlx_texture_t	*wall_tx;
+	mlx_image_t		*wall_img;
+	mlx_texture_t	*col_tx;
+	mlx_image_t		*col_img;
+	mlx_texture_t	*end_tx;
+	mlx_image_t		*end_img;
+	mlx_texture_t	*backgr_tx;
+	mlx_image_t		*backgr_img;
+}	t_game;
+
 typedef struct s_map
 {
 	char	**content;
@@ -37,8 +51,6 @@ typedef struct s_map
 	int		player_y;
 	mlx_t	*mlx;
 }	t_map;
-
-
 
 // --------------------------MAP---------------------------------------
 //
@@ -65,7 +77,10 @@ char	**create_dup_map(t_map *map);
 // --------------------------WINDOW------------------------------------
 //
 // ---------------------------window-----------------------------------
-void	create_window(t_map *map);
+void	create_window(t_map *map, t_game *game);
+void	place_images(t_map *map, t_game *game);
+void	images_init(t_map *map, t_game *game);
+void	delete_textures(t_game *game);
 // ---------------------------FREE-------------------------------------
 //
 // ---------------------------free-------------------------------------
