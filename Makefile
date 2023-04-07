@@ -6,7 +6,7 @@
 #    By: ivan-mel <ivan-mel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/21 12:51:22 by ivan-mel          #+#    #+#              #
-#    Updated: 2023/04/05 16:34:19 by ivan-mel         ###   ########.fr        #
+#    Updated: 2023/04/07 19:39:06 by ivan-mel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,9 @@ SRC			:=	create_map.c \
 				map_parsing.c \
 				map_parsing2.c \
 				map_parsing3.c \
+				moving.c \
 				window.c \
+				images.c \
 				free_and_exit.c
 #BONUS
 # SRCB		:=	

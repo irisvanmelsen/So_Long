@@ -6,7 +6,7 @@
 /*   By: ivan-mel <ivan-mel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 13:55:19 by ivan-mel          #+#    #+#             */
-/*   Updated: 2023/04/05 18:35:49 by ivan-mel         ###   ########.fr       */
+/*   Updated: 2023/04/07 17:05:44 by ivan-mel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	main(int argc, char **argv)
 	game = ft_calloc(sizeof(t_game), 1);
 	if (!game)
 		exit (EXIT_FAILURE);
+	map->game = game;
 	fd = get_file(argc, argv);
 	map->content = read_map(fd);
 	map->length_x = ft_strlen(map->content[0]);
