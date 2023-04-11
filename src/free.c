@@ -1,39 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ivan-mel <ivan-mel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/22 13:55:19 by ivan-mel          #+#    #+#             */
-/*   Updated: 2023/04/11 19:02:51 by ivan-mel         ###   ########.fr       */
+/*   Created: 2023/04/11 15:26:36 by ivan-mel          #+#    #+#             */
+/*   Updated: 2023/04/11 19:02:37 by ivan-mel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-int	main(int argc, char **argv)
+void	free_map_2d(char **map_copy)
 {
-	t_map	map;
-	int		fd;
-	int		i;
+	int	i;
 
 	i = 0;
-	fd = get_file(argc, argv);
-	map.content = read_map(fd);
-	if (!map.content)
-		return (1);
-	if (check_errors(&map) == 1)
+	while (map_copy[i])
 	{
-		free_map_2d(map.content);
-		return (1);
-	}
-	while (map.content[i])
-	{
-		ft_printf("%s\n", map.content[i]);
+		free(map_copy[i]);
 		i++;
 	}
-	create_window(&map, &map.game);
-	free_map_2d(map.content);
-	system("so long");
+	free(map_copy);
 }

@@ -6,7 +6,7 @@
 /*   By: ivan-mel <ivan-mel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 12:51:17 by ivan-mel          #+#    #+#             */
-/*   Updated: 2023/03/31 17:29:24 by ivan-mel         ###   ########.fr       */
+/*   Updated: 2023/04/11 18:28:00 by ivan-mel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	check_map_init(t_map *map)
 {
+	map->length_x = ft_strlen(map->content[0]);
+	map->length_y = count_lines(map->content);
 	map->e_count = 0;
 	map->p_count = 0;
 	map->c_count = 0;
@@ -26,22 +28,45 @@ int	check_errors(t_map *map)
 	char	**map_after_ff;
 	char	**dup_map;
 
-	dup_map = create_dup_map(map);
 	check_map_init(map);
-	if (check_rectangle(map) == 1)
-		return (ft_printf("Wall is not Rectangular\n"));
-	if (check_sides_wall(map) == 1)
-		return (ft_printf("Invalid Wall Error\n"));
-	if (check_first_last_walls(map) == 1)
-		return (ft_printf("Invalid Wall Error\n"));
-	if (check_characters(map) == 1)
-		return (ft_printf("Invalid amount of characters\n"));
+	if (check_error_messages(map) == 1)
+		return (1);
 	find_player(map);
+	dup_map = create_dup_map(map);
+	if (!dup_map)
+		return (1);
 	map_after_ff = floodfill(dup_map, map->player_y, map->player_x);
 	if (check_map_after_ff(map_after_ff) == 1)
 	{
-		free(map_after_ff);
-		return (ft_printf("Invalid Path\n"));
+		free_map_2d(map_after_ff);
+		ft_printf("Invalid Path\n");
+		return (1);
+	}
+	free_map_2d(dup_map);
+	return (0);
+}
+
+int	check_error_messages(t_map *map)
+{
+	if (check_rectangle(map) == 1)
+	{
+		ft_printf("Wall is not Rectangular\n");
+		return (1);
+	}
+	if (check_sides_wall(map) == 1)
+	{
+		ft_printf("Invalid Wall Error\n");
+		return (1);
+	}
+	if (check_first_last_walls(map) == 1)
+	{
+		ft_printf("Invalid Wall Error\n");
+		return (1);
+	}
+	if (check_characters(map) == 1)
+	{
+		ft_printf("Invalid amount of characters\n");
+		return (1);
 	}
 	return (0);
 }
@@ -78,20 +103,6 @@ int	check_first_last_walls(t_map *map)
 		if (map->content[map->length_y - 1][x] != '1')
 			return (1);
 		x++;
-	}
-	return (0);
-}
-
-int	check_rectangle(t_map *map)
-{
-	int	i;
-
-	i = 0;
-	while (map->content[i])
-	{
-		if (map_strlen(map->content[i]) != map->length_x)
-			return (1);
-		i++;
 	}
 	return (0);
 }

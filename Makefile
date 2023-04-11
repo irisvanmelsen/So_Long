@@ -6,7 +6,7 @@
 #    By: ivan-mel <ivan-mel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/21 12:51:22 by ivan-mel          #+#    #+#              #
-#    Updated: 2023/04/07 19:39:06 by ivan-mel         ###   ########.fr        #
+#    Updated: 2023/04/11 18:58:06 by ivan-mel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,9 @@ MLX			:=	./MLX42
 LIBS_MLX	:=	$(MLX)/build/libmlx42.a -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit
 #UTILS
 RM 			:=	rm -rf
-FLAGS 		:=	-Wall -Werror -Wextra -g -fsanitize=address
+FLAGS 		:=	-Wall -Werror -Wextra
 SRC			:=	create_map.c \
+				create_map_utils.c \
 				main.c \
 				map_parsing.c \
 				map_parsing2.c \
@@ -27,7 +28,8 @@ SRC			:=	create_map.c \
 				moving.c \
 				window.c \
 				images.c \
-				free_and_exit.c
+				keyboard.c \
+				free.c 
 #BONUS
 # SRCB		:=	
 

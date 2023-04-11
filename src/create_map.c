@@ -6,34 +6,71 @@
 /*   By: ivan-mel <ivan-mel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:35:22 by ivan-mel          #+#    #+#             */
-/*   Updated: 2023/03/31 16:42:45 by ivan-mel         ###   ########.fr       */
+/*   Updated: 2023/04/11 19:00:20 by ivan-mel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
+static size_t	ft_strlen_protect(char *s)
+{
+	int	length;
+
+	length = 0;
+	if (s == NULL)
+		return (0);
+	while (s[length] != '\0')
+	{
+		length++;
+	}
+	return (length);
+}
+
+static char	*ft_strjoin_free(char *s1, char *s2)
+{
+	char	*str3;
+	int		lengths1;
+	int		lengths2;
+
+	lengths1 = ft_strlen_protect(s1);
+	lengths2 = ft_strlen_protect(s2);
+	str3 = malloc(sizeof(char) * (lengths1 + lengths2 + 1));
+	if (!str3)
+	{
+		free(s1);
+		free(s2);
+		return (NULL);
+	}
+	ft_strlcpy_protect(str3, s1, lengths1 + 1);
+	ft_strlcat(str3 + lengths1, s2, lengths2 + 1);
+	free(s1);
+	free(s2);
+	return (str3);
+}
+
 char	**read_map(int fd)
 {
 	char	*map;
-	char	*tmp;
 	char	*line;
 	char	**result;
 
-	line = get_next_line(fd);
-	tmp = ft_strdup(line);
-	while (line)
+	line = NULL;
+	map = NULL;
+	while (1)
 	{
-		free(line);
 		line = get_next_line(fd);
-		if (line != NULL)
-			map = ft_strjoin(tmp, line);
-		free(tmp);
-		tmp = ft_strdup(map);
+		if (line == NULL)
+			break ;
+		map = ft_strjoin_free(map, line);
+		if (!map)
+			return (NULL);
 	}
+	if (map == NULL)
+		return (NULL);
 	result = ft_split(map, '\n');
-	exit_one(*result);
-	free(tmp);
 	free(map);
+	if (!result)
+		return (NULL);
 	return (result);
 }
 

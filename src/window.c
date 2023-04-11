@@ -6,7 +6,7 @@
 /*   By: ivan-mel <ivan-mel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:08:44 by ivan-mel          #+#    #+#             */
-/*   Updated: 2023/04/07 20:02:19 by ivan-mel         ###   ########.fr       */
+/*   Updated: 2023/04/11 18:08:37 by ivan-mel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@
 
 void	create_window(t_map *map, t_game *game)
 {
-	map->mlx = mlx_init(map->length_x * 32, map->length_y * 32, "test", true);
+	map->game.steps = 0;
+	map->mlx = mlx_init(map->length_x * 32, map->length_y * 32, "42", true);
 	if (!map->mlx)
 		ft_printf("Error map->mlx");
 	images_init(map, game);
@@ -65,41 +66,5 @@ void	delete_textures(t_game *game)
 	mlx_delete_texture(game->wall_tx);
 	mlx_delete_texture(game->col_tx);
 	mlx_delete_texture(game->end_tx);
-}
-
-void	keyboard_button(mlx_key_data_t key, void *param)
-{
-	t_map	*map;
-
-	map = param;
-
-	if (key.action != MLX_PRESS)
-		return ;
-	if (key.key == MLX_KEY_ESCAPE)
-		mlx_close_window(map->mlx);
-	if (key.key == MLX_KEY_S
-		&& map->content[map->game->char_y + 1][map->game->char_x] != '1')
-	{
-		map->game->char_y++;
-		map->game->char_img->instances[0].y += 32;
-	}
-	if (key.key == MLX_KEY_W
-		&& map->content[map->game->char_y - 1][map->game->char_x] != '1')
-	{
-		map->game->char_y--;
-		map->game->char_img->instances[0].y -= 32;
-	}
-	if (key.key == MLX_KEY_D
-		&& map->content[map->game->char_y][map->game->char_x + 1] != '1')
-	{
-		map->game->char_x++;
-		map->game->char_img->instances[0].x += 32;
-	}
-	if (key.key == MLX_KEY_A
-		&& map->content[map->game->char_y][map->game->char_x - 1] != '1')
-	{
-		map->game->char_x--;
-		map->game->char_img->instances[0].x -= 32;
-	}
-	check_tiles(map);
+	mlx_delete_texture(game->backgr_tx);
 }
