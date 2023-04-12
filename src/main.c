@@ -6,7 +6,7 @@
 /*   By: ivan-mel <ivan-mel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 13:55:19 by ivan-mel          #+#    #+#             */
-/*   Updated: 2023/04/11 19:02:51 by ivan-mel         ###   ########.fr       */
+/*   Updated: 2023/04/12 19:30:16 by ivan-mel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,14 @@ int	main(int argc, char **argv)
 	if (!map.content)
 		return (1);
 	if (check_errors(&map) == 1)
-	{
-		free_map_2d(map.content);
-		return (1);
-	}
+		return (free_map_2d(map.content), 1);
 	while (map.content[i])
 	{
 		ft_printf("%s\n", map.content[i]);
 		i++;
 	}
-	create_window(&map, &map.game);
+	if (!create_window(&map, &map.game))
+		return (free_map_2d(map.content), 1);
 	free_map_2d(map.content);
-	system("so long");
+	// system("leaks so_long");
 }

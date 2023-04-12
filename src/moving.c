@@ -6,7 +6,7 @@
 /*   By: ivan-mel <ivan-mel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 17:29:47 by ivan-mel          #+#    #+#             */
-/*   Updated: 2023/04/11 19:14:43 by ivan-mel         ###   ########.fr       */
+/*   Updated: 2023/04/12 19:26:07 by ivan-mel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,19 @@ static void	remove_col(t_map *map)
 	}
 }
 
+static void	game_over(t_map *map)
+{
+	const int		x = map->game.char_x * 32;
+	const int		y = map->game.char_y * 32;
+	mlx_instance_t	*player;
+
+	player = &map->game.char_img->instances[0];
+	player->enabled = false;
+	mlx_image_to_window(map->mlx, map->game.gameover_img, x, y);
+	map->game.steps = 0;
+	map->game.dead = 1;
+}
+
 void	check_tiles(t_map *map)
 {
 	if (map->content[map->game.char_y][map->game.char_x] == 'C')
@@ -49,4 +62,7 @@ void	check_tiles(t_map *map)
 			mlx_close_window(map->mlx);
 		}
 	}
+	if (map->content[map->game.char_y][map->game.char_x] == 'F')
+		game_over(map);
 }
+

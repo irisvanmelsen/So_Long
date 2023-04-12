@@ -6,7 +6,7 @@
 /*   By: ivan-mel <ivan-mel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:35:22 by ivan-mel          #+#    #+#             */
-/*   Updated: 2023/04/11 19:00:20 by ivan-mel         ###   ########.fr       */
+/*   Updated: 2023/04/12 15:40:57 by ivan-mel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char	*ft_strjoin_free(char *s1, char *s2)
 
 	lengths1 = ft_strlen_protect(s1);
 	lengths2 = ft_strlen_protect(s2);
-	str3 = malloc(sizeof(char) * (lengths1 + lengths2 + 1));
+	str3 = ft_calloc(sizeof(char), (lengths1 + lengths2 + 1));
 	if (!str3)
 	{
 		free(s1);

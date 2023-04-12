@@ -6,7 +6,7 @@
 /*   By: ivan-mel <ivan-mel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 12:56:18 by ivan-mel          #+#    #+#             */
-/*   Updated: 2023/04/11 18:57:02 by ivan-mel         ###   ########.fr       */
+/*   Updated: 2023/04/12 19:26:01 by ivan-mel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <limits.h>
 # include <stdio.h>
 # include <fcntl.h>
+# include <stdbool.h>
+
 
 # include <MLX42.h>
 # include <libft.h>
@@ -36,9 +38,15 @@ typedef struct s_game
 	mlx_image_t		*end_img;
 	mlx_texture_t	*backgr_tx;
 	mlx_image_t		*backgr_img;
+	mlx_texture_t	*fire_tx;
+	mlx_image_t		*fire_img;
+	mlx_texture_t	*gameover_tx;
+	mlx_image_t		*gameover_img;
+	mlx_image_t		*steps_img;
 	int				char_y;
 	int				char_x;
 	int				steps;
+	int				dead;
 }	t_game;
 
 typedef struct s_map
@@ -85,10 +93,10 @@ int		check_rectangle(t_map *map);
 //
 // ---------------------------window-----------------------------------
 void	place_images(t_map *map, t_game *game);
-void	images_init(t_map *map, t_game *game);
 void	delete_textures(t_game *game);
-void	create_window(t_map *map, t_game *game);
-void	keyboard_button(mlx_key_data_t key, void *param);
+void	push_images_window(t_map *map, t_game *game);
+bool	create_window(t_map *map, t_game *game);
+bool	images_init(t_game *game);
 // --------------------------MOVING------------------------------------
 //
 // -------------------------moving-------------------------------------
@@ -98,12 +106,13 @@ void	place_background(t_map *map, t_game *game);
 void	place_walls(t_map *map, t_game *game);
 void	place_col_exit(t_map *map, t_game *game);
 void	place_player(t_map *map, t_game *game);
+void	place_enemies(t_map *map, t_game *game);
 // -------------------------keyboard-----------------------------------
 void	keyboard_button(mlx_key_data_t key, void *param);
-void	keyboard_down(mlx_key_data_t key, t_map *map);
-void	keyboard_up(mlx_key_data_t key, t_map *map);
-void	keyboard_right(mlx_key_data_t key, t_map *map);
-void	keyboard_left(mlx_key_data_t key, t_map *map);
+void	keyboard_down(mlx_key_data_t key, t_map *ma, char *steps_str);
+void	keyboard_up(mlx_key_data_t key, t_map *map, char *steps_str);
+void	keyboard_right(mlx_key_data_t key, t_map *map, char *steps_str);
+void	keyboard_left(mlx_key_data_t key, t_map *map, char *steps_str);
 // ---------------------------FREE-------------------------------------
 //
 // ---------------------------free-------------------------------------

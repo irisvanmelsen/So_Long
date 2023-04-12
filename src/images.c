@@ -6,7 +6,7 @@
 /*   By: ivan-mel <ivan-mel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 19:32:40 by ivan-mel          #+#    #+#             */
-/*   Updated: 2023/04/11 19:02:43 by ivan-mel         ###   ########.fr       */
+/*   Updated: 2023/04/12 15:42:11 by ivan-mel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,25 @@ void	place_player(t_map *map, t_game *game)
 				mlx_image_to_window(map->mlx, game->char_img, x * 32, y * 32);
 				return ;
 			}
+			x++;
+		}
+		y++;
+	}
+}
+
+void	place_enemies(t_map *map, t_game *game)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (map->content [y])
+	{
+		x = 0;
+		while (map->content [y][x])
+		{
+			if (map->content [y][x] == 'F')
+				mlx_image_to_window(map->mlx, game->fire_img, x * 32, y * 32);
 			x++;
 		}
 		y++;

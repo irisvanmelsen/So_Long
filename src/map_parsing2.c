@@ -6,7 +6,7 @@
 /*   By: ivan-mel <ivan-mel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 15:18:29 by ivan-mel          #+#    #+#             */
-/*   Updated: 2023/04/11 17:41:37 by ivan-mel         ###   ########.fr       */
+/*   Updated: 2023/04/12 15:36:10 by ivan-mel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ char	**floodfill(char **content, int y, int x)
 	if (content[y][x] != '1')
 	{
 		if (content[y][x] == 'C' || content[y][x] == '0'
-			|| content[y][x] == 'P' || content[y][x] == 'E')
+			|| content[y][x] == 'P' || content[y][x] == 'E'
+			|| content[y][x] == 'F')
 			content[y][x] = '1';
 		else
 			return (content);
