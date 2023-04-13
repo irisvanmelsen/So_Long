@@ -6,7 +6,7 @@
 /*   By: ivan-mel <ivan-mel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 14:08:44 by ivan-mel          #+#    #+#             */
-/*   Updated: 2023/04/12 19:27:09 by ivan-mel         ###   ########.fr       */
+/*   Updated: 2023/04/13 12:48:34 by ivan-mel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@
 
 bool	images_init(t_game *game)
 {
-	game->char_tx = mlx_load_png("Crow.png");
-	game->wall_tx = mlx_load_png("Tree.png");
-	game->col_tx = mlx_load_png("Drink.png");
-	game->end_tx = mlx_load_png("Chest.png");
-	game->backgr_tx = mlx_load_png("Background.png");
-	game->fire_tx = mlx_load_png("Fire.png");
-	game->gameover_tx = mlx_load_png("CrowFire.png");
+	game->char_tx = mlx_load_png("assets/Crow.png");
+	game->wall_tx = mlx_load_png("assets/Tree.png");
+	game->col_tx = mlx_load_png("assets/Drink.png");
+	game->end_tx = mlx_load_png("assets/Chest.png");
+	game->backgr_tx = mlx_load_png("assets/Background.png");
+	game->fire_tx = mlx_load_png("assets/Fire.png");
+	game->gameover_tx = mlx_load_png("assets/CrowFire.png");
 	if (!game->char_tx || !game->wall_tx || !game->col_tx
 		|| !game->end_tx || !game->backgr_tx || !game->fire_tx
 		|| !game->gameover_tx)
@@ -41,7 +41,7 @@ bool	images_init(t_game *game)
 bool	create_window(t_map *map, t_game *game)
 {
 	map->game.steps = 0;
-	map->mlx = mlx_init(map->length_x * 32, map->length_y * 32, "42", true);
+	map->mlx = mlx_init(map->length_x * 32, map->length_y * 32, "42", false);
 	if (!map->mlx)
 		ft_printf("Error map->mlx");
 	if (!images_init(game))
@@ -62,7 +62,6 @@ bool	create_window(t_map *map, t_game *game)
 	return (true);
 }
 
-
 void	push_images_window(t_map *map, t_game *game)
 {
 	game->char_img = mlx_texture_to_image(map->mlx, game->char_tx);
@@ -72,7 +71,6 @@ void	push_images_window(t_map *map, t_game *game)
 	game->backgr_img = mlx_texture_to_image(map->mlx, game->backgr_tx);
 	game->fire_img = mlx_texture_to_image(map->mlx, game->fire_tx);
 	game->gameover_img = mlx_texture_to_image(map->mlx, game->gameover_tx);
-
 }
 
 void	place_images(t_map *map, t_game *game)

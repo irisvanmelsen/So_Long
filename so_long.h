@@ -6,7 +6,7 @@
 /*   By: ivan-mel <ivan-mel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 12:56:18 by ivan-mel          #+#    #+#             */
-/*   Updated: 2023/04/12 19:26:01 by ivan-mel         ###   ########.fr       */
+/*   Updated: 2023/04/13 12:34:14 by ivan-mel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <stdbool.h>
-
 
 # include <MLX42.h>
 # include <libft.h>

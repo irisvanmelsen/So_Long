@@ -6,7 +6,7 @@
 /*   By: ivan-mel <ivan-mel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 17:29:47 by ivan-mel          #+#    #+#             */
-/*   Updated: 2023/04/12 19:26:07 by ivan-mel         ###   ########.fr       */
+/*   Updated: 2023/04/13 12:32:20 by ivan-mel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,3 @@ void	check_tiles(t_map *map)
 	if (map->content[map->game.char_y][map->game.char_x] == 'F')
 		game_over(map);
 }
-
