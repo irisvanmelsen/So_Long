@@ -6,7 +6,7 @@
 /*   By: ivan-mel <ivan-mel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:35:22 by ivan-mel          #+#    #+#             */
-/*   Updated: 2023/04/12 15:40:57 by ivan-mel         ###   ########.fr       */
+/*   Updated: 2023/04/13 14:36:07 by ivan-mel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,21 @@ int	get_file(int argc, char **argv)
 	int	fd;
 
 	if (argc != 2)
+	{
 		ft_printf("Missing Arguments\n");
+		exit (EXIT_FAILURE);
+	}
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
+	{
 		ft_printf("No File Found\n");
+		exit (EXIT_FAILURE);
+	}
 	if (ft_strncmp(argv[1] + ft_strlen(argv[1]) - 4, ".ber", 4))
+	{
 		ft_printf("Incorrect File\n");
+		exit (EXIT_FAILURE);
+	}
 	return (fd);
 }
 

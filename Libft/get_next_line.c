@@ -6,7 +6,7 @@
 /*   By: ivan-mel <ivan-mel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:33:01 by ivan-mel          #+#    #+#             */
-/*   Updated: 2023/03/23 14:43:58 by ivan-mel         ###   ########.fr       */
+/*   Updated: 2023/04/13 14:32:09 by ivan-mel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static char	*ft_strjoingnl(char *line, char const *buffy)
 
 	i = 0;
 	j = 0;
-	new_line = ft_callocgnl(sizeof(char) , (ft_strlengnl(line)
+	new_line = ft_callocgnl(sizeof(char), (ft_strlengnl(line)
 				+ ft_strlengnl(buffy) + 1));
 	if (!new_line)
 		return (free(line), NULL);
@@ -105,7 +105,7 @@ static char	*trim_malloc(char *line)
 	i = 0;
 	j = 0;
 	length = ft_strlengnl(line);
-	result = ft_callocgnl(sizeof(char) , (length + 1));
+	result = ft_callocgnl(sizeof(char), (length + 1));
 	if (!result)
 		return (free(line), NULL);
 	while (line[j])
